@@ -1,17 +1,9 @@
-'''
-Created on Aug 7, 2017
-
-@author: hnagarajan
-'''
-
 import os
 import re
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
 from time import strftime
-
-from .DelBadChars import stripBadChars, StateToStateCode
 
 def exportXML(StoreName, AgentID, ScraperTargetID, ScraperJobHistoryID, scraped_data, debug):
     OutPutFolder = '\\\\dcfilprd100\\BrokerListingExtract-Prd\\Content Acquisition\\Scrape Outputs\\XML Exports\\'

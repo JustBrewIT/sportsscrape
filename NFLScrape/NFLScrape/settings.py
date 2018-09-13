@@ -4,7 +4,7 @@ from pathlib import Path
 
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for RetailScrape project
+# Scrapy settings for NFLScrape project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -13,10 +13,10 @@ from pathlib import Path
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'RetailScrape'
+BOT_NAME = 'NFLScrape'
 
-SPIDER_MODULES = ['RetailScrape.spiders']
-NEWSPIDER_MODULE = 'RetailScrape.spiders'
+SPIDER_MODULES = ['NFLScrape.spiders']
+NEWSPIDER_MODULE = 'NFLScrape.spiders'
 STATUS = 'DEV'
 SQL_CONNECTION_STRING = (
             r'Driver={ODBC Driver 13 for SQL Server};'
@@ -25,7 +25,7 @@ SQL_CONNECTION_STRING = (
             )
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'RetailScrape (+http://www.yourdomain.com)'
+#USER_AGENT = 'NFLScrape (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -56,13 +56,13 @@ COOKIES_ENABLED = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'RetailScrape.middlewares.RetailScrapeSpiderMiddleware': 543,
+#    'NFLScrape.middlewares.NFLScrapeSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'RetailScrape.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'NFLScrape.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 DOWNLOADER_MIDDLEWARES = {
@@ -75,10 +75,10 @@ DOWNLOADER_MIDDLEWARES = {
 inputFolder = os.path.dirname(os.getcwd())
 if Path(os.path.join(inputFolder,os.pardir, "Input")).exists():
     inputFolder = os.path.join(os.path.join(os.pardir, "Input"))
-if Path(os.path.join(inputFolder, "RetailScrape")).exists():
-    inputFolder = os.path.join(inputFolder, "RetailScrape")
-if Path(os.path.join(inputFolder, "RetailScrape")).exists():
-    inputFolder = os.path.join(inputFolder, "RetailScrape")
+if Path(os.path.join(inputFolder, "NFLScrape")).exists():
+    inputFolder = os.path.join(inputFolder, "NFLScrape")
+if Path(os.path.join(inputFolder, "NFLScrape")).exists():
+    inputFolder = os.path.join(inputFolder, "NFLScrape")
 if Path(os.path.join(inputFolder, "Input")).exists():
     inputFolder = os.path.join(inputFolder, "Input")
 
@@ -95,7 +95,7 @@ USER_AGENT_LIST = (os.path.join(inputFolder, "useragents.txt"))
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'RetailScrape.pipelines.RetailScrapePipeline': 300,
+#    'NFLScrape.pipelines.NFLScrapePipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -127,7 +127,7 @@ RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
   
 DOWNLOADER_MIDDLEWARES = {
 'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
-'RetailScrape.middlewares.ProxyMiddleware': 100,
+'NFLScrape.middlewares.ProxyMiddleware': 100,
 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
 }
 PROXY_LIST = os.path.join(inputFolder, "ProxyList.txt")

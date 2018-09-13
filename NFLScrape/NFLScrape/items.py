@@ -8,7 +8,7 @@
 import scrapy
 
 
-class RetailScrapeItem(scrapy.Item):
+class NFLScrapeItem(scrapy.Item):
     AddressLine = scrapy.Field()
     StoreName = scrapy.Field()
     StoreNumber = scrapy.Field()
