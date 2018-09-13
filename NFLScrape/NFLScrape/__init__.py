@@ -6,7 +6,7 @@ import unidecode
 import scrapy
 from NFLScrape.NFLScrape.charFormat import stripBadChars
 from NFLScrape.NFLScrape.items import NFLScrapeItem
-#from NFLScrape.NFLScrape.writeLog import writeLog
+from NFLScrape.NFLScrape.writeLog import writeLog
 from NFLScrape.NFLScrape.xmlGen import exportXML
 from NFLScrape.NFLScrape.csvGen import exportCSV
 from NFLScrape.NFLScrape.util import convert_headers
