@@ -7,5 +7,5 @@
 
 
 
-class RetailScrapePipeline(object):
+class NFLScrapePipeline(object):
     pass

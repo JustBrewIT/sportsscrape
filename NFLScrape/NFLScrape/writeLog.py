@@ -2,11 +2,11 @@ import logging
 import pyodbc
 
 
-def writeLog(ScraperTargetID, AgentID, AgentStartTime, AgentEndTime, ScraperJobHistoryID, LocationsScraped):
+def writeLog(SiteID, SiteParentID, AgentID, StartDatetime, FinishDatetime, JobHistoryID):
     try:
         conn_str = (
             r'Driver={ODBC Driver 13 for SQL Server};'
-            r'Server=DCSQLPRD104;'
+            r'Server=DESKTOP-79VFTUR\SQLEXPRESS;'
             r'Trusted_Connection=yes;'
         )
         logging.debug("Connecting")
@@ -15,8 +15,8 @@ def writeLog(ScraperTargetID, AgentID, AgentStartTime, AgentEndTime, ScraperJobH
         logging.debug("Connected")
 
         JobQuery = (
-        "EXEC [ADC].[dbo].[HN_rptRetailScrapeAgentLogInsert] @TargetID = %s,@AgentID = %s,@AgentStartTime = '%s', @AgentEndTime = '%s', @JobHistoryID = %s, @LocationCount= %s"
-        % (ScraperTargetID, AgentID, AgentStartTime, AgentEndTime, ScraperJobHistoryID, LocationsScraped))
+        "EXEC [SportsScrape].[dbo].[NFLScrape_uspJobHistory] @SiteID = %s, @SiteParentID = %s, @AgentID = %s, @StartDatetime = '%s', @FinishDatetime = '%s', @JobHistoryID = %s"
+        % (SiteID, SiteParentID, AgentID, StartDatetime, FinishDatetime, JobHistoryID))
 
         try:
             cursor.execute(JobQuery)

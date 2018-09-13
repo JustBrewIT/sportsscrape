@@ -4,7 +4,8 @@ from datetime import datetime
 import re
 import unidecode
 import scrapy
-from NFLScrape.NFLScrape.charFormat import stripBadChars
+from NFLScrape.NFLScrape.charFormat import format_string
+from NFLScrape.NFLScrape.GetJobHistoryID import GetJobHistoryID
 from NFLScrape.NFLScrape.items import NFLScrapeItem
 from NFLScrape.NFLScrape.writeLog import writeLog
 from NFLScrape.NFLScrape.xmlGen import exportXML
@@ -16,15 +17,15 @@ from NFLScrape.NFLScrape.util import convert_headers
 class NFLSpider(scrapy.Spider):
     name = None
     SiteID = []
+    SiteParentID = ''
     AgentID = None
-    LocationIDs = set()
     nfldata = []
-    Brands = []
     Duplicates = 0
-    AgentStartTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    AgentEndTime = None
+    StartDatetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    FinishDatetime = None
     TestURL = ''
     RequestFailed = False
+    Debug = True
 #    handle_httpstatus_list = [402]
 
     def start_requests(self):
@@ -50,7 +51,7 @@ class NFLSpider(scrapy.Spider):
 
     def closed(self, reason):
         if len(self.nfldata) > 0:
-            self.AgentEndTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.FinishDatetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             logging.debug("Scraped {0} total nfldata!".format(len(self.nfldata)))
             for n, target_id in enumerate(self.SiteID):
                 temp = []
@@ -66,7 +67,7 @@ class NFLSpider(scrapy.Spider):
                     if job_history_id > 0:
                         exportXML(self.Brands[n], self.AgentID, target_id, job_history_id, temp, self.Debug)
                     if not self.Debug and job_history_id > 0:
-                        writeLog(target_id, self.AgentID, self.AgentStartTime, self.AgentEndTime,
+                        writeLog(target_id, self.AgentID, self.FinishDatetime, self.FinishDatetime,
                                  job_history_id, len(temp))
 
             logging.debug('Spider closed: %s', self.name)
@@ -77,17 +78,7 @@ class NFLSpider(scrapy.Spider):
 
     def add_data(self, data):
 
-        def format_string(input_string):
-            if input_string is not None:
-                input_string = unidecode.unidecode(input_string)
-                input_string = input_string.replace('%20', ' ')
-                input_string = input_string.replace('-', ' ')
-                input_string = input_string.replace('_', ' ')
-                bad_chars = ['#', '?', '&', ';', '(', ')', '$', '!', '<', '>']
-                for x in bad_chars:
-                    input_string = input_string.replace(x, '')
-                return stripBadChars(input_string)
-
+        data = format_string(data)
         if data is None:
             return 0
         hash_string = ''
