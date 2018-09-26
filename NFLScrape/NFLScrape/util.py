@@ -31,3 +31,7 @@ def conCo(x):
     for i in range(len(x)):
         sum += x[i]+' '
     return sum
+
+
+def test():
+    print('test')

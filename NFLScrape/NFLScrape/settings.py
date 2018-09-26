@@ -82,7 +82,7 @@ if Path(os.path.join(inputFolder, "NFLScrape")).exists():
 if Path(os.path.join(inputFolder, "Input")).exists():
     inputFolder = os.path.join(inputFolder, "Input")
 
-USER_AGENT_LIST = (os.path.join(inputFolder, "useragents.txt"))
+#USER_AGENT_LIST = (os.path.join(inputFolder, "useragents.txt"))
 
 #USER_AGENT_LIST = "/input/useragents.txt"
 
