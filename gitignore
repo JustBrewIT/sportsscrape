@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+/RetailScrape/Output/
+/build/
+/logs/
+/eggs/
+/dbs/
+/output.egg
+/.idea/
+/RunServer.bat
+/project.egg-info/
+/Documentation/images/
+*.aux
+RetailScrape/spiders/__pycache__/
+*.pyc
+/RetailScrape/scrapyd-deploy
