@@ -1,8 +1,0 @@
-scrapy
-pyodbc
-numpy
-scrapy-random-useragent
-pypiwin32
-scrapyd
-scrapyd-client
-unidecode
