@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-/RetailScrape/Output/
+/NFLScrape/Output/
 /build/
 /logs/
 /eggs/
@@ -10,6 +10,6 @@
 /project.egg-info/
 /Documentation/images/
 *.aux
-RetailScrape/spiders/__pycache__/
+NFLScrape/spiders/__pycache__/
 *.pyc
-/RetailScrape/scrapyd-deploy
+/NFLScrape/scrapyd-deploy
