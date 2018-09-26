@@ -21,6 +21,7 @@ class NFLScrapeItem(scrapy.Item):
     StreetSuffix = scrapy.Field()
 
     # Mandatory
+    SiteID = scrapy.Field()
     SiteTypeID = scrapy.Field()
     AgentID = scrapy.Field()
 
