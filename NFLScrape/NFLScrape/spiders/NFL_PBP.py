@@ -8,9 +8,9 @@ import unidecode
 
 
 class NFL(NFLScrape.NFLSpider):
-    name = 'NFL'
+    name = 'NFL_PBP'
     SiteID = [1]
-    SiteNames = ['NFLOffense']
+    SiteNames = ['NFL_PBP']
     SiteTypeID = 1
     AgentID = 1
     Debug = True
@@ -37,12 +37,24 @@ class NFL(NFLScrape.NFLSpider):
         yield scrapy.Request(url=url, headers=headers, callback=self.parse)
 
     def parse_request(self, response):
-        # content = (response.body_as_unicode().encode('cp850', 'replace').decode('cp850'))
-        print(response.text)
-        # for data in response.xpath('(//table[@id="result"]/tbody)[position() = last()]/tr'):
-        #     self.add_data(self.get_stats(data))
+        k = None
+        r = re.compile(r".*/(\d+)")
+        url = response.url
+        if r.match(url):
+            k = r.findall(url)[0].strip()
+        print(k)
+        if k:
+            content = (response.body_as_unicode().encode('cp850', 'replace').decode('cp850'))
+            data = json.loads(content)
+            data_team = {}
+            data_team['HomeTeamName'] = data[k]['home']['abbr']
+            data_team['AwayTeamName'] = data[k]['away']['abbr']
+            data_team['AwayTeamName'] = data[k]['away']['abbr']
 
-    def get_stats(self, data):
+
+        #       self.add_data(self.get_stats(data, data_team))
+
+    def get_stats(self, data, data_team):
         site = NFLScrapeItem(SiteID=self.SiteID[0], AgentID=self.AgentID)
         try:
             name = data.xpath('.//td[2]/a/text()').extract_first()

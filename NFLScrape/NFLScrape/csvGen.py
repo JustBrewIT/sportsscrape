@@ -5,7 +5,7 @@ from pathlib import Path
 from time import strftime
 
 
-def exportCSV(SiteName, AgentID, SiteID, scraped_data):
+def exportCSV(SiteID, AgentID, SiteName, data):
     ScrapeFolder = os.path.dirname(os.getcwd())
     while Path(os.path.join(ScrapeFolder, "NFLScrape")).exists():
         ScrapeFolder = os.path.join(ScrapeFolder,"NFLScrape")
@@ -16,11 +16,11 @@ def exportCSV(SiteName, AgentID, SiteID, scraped_data):
 
     with open(os.path.join(ScrapeFolder, "%s_%s.csv" % (SiteName, strftime("%Y%m%d"))), 'w', newline='',
               encoding='UTF-8', errors='replace') as csvOutput:
-        all_keys = set().union(*(d.keys() for d in scraped_data))
+        all_keys = set().union(*(d.keys() for d in data))
         try:
             writer = csv.DictWriter(csvOutput, fieldnames=all_keys)
             writer.writeheader()
-            for x in scraped_data:
+            for x in data:
                 writer.writerow(x)
         except IndexError:
             pass
